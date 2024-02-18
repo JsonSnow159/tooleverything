@@ -1,4 +1,4 @@
-FROM mysql:8.0.19
+FROM arm64/mysql:latest
 
 MAINTAINER jeecgos@163.com
 
