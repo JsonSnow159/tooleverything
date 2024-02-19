@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.ToolTemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.jeecg.modules.system.entity.ToolTemplate">
+        <result column="id" property="id"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="tool_code" property="toolCode"/>
+        <result column="version" property="version"/>
+        <result column="template_content" property="templateContent"/>
+    </resultMap>
+
+    <sql id="table">
+        tool_template
+    </sql>
+
+    <select id="findByTool" resultMap="BaseResultMap">
+        select *
+        from
+        <include refid="table"/>
+        where tool_code = #{toolCode} and version = #{version} and is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="org.jeecg.modules.system.entity.ToolTemplate">
+        insert into
+        <include refid="table"/>
+        (tool_code,version,template_content)
+        values
+        (#{toolCode}, #{version}, #{templateContent})
+    </insert>
+
+    <update id="update" parameterType="org.jeecg.modules.system.entity.ToolTemplate">
+        update
+        <include refid="table" />
+        set template_content = #{templateContent}
+        where tool_code = #{toolCode} and version = #{version}
+    </update>
+
+</mapper>

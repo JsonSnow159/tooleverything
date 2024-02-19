@@ -171,7 +171,6 @@ spring:
     database: 0
     host: 127.0.0.1
     port: 6379
-    password: ''
 #mybatis plus 设置
 mybatis-plus:
   mapper-locations: classpath*:org/jeecg/modules/**/xml/*Mapper.xml
@@ -214,7 +213,7 @@ jeecg:
     #webapp文件路径
     webapp: /opt/webapp
   shiro:
-    excludeUrls: /test/**,/test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/jmreport/bigscreen2/**
+    excludeUrls: /tsp/**,/admin/**,/client/**,/test/**,/test/jeecgDemo/demo3,/test/jeecgDemo/redisDemo/**,/jmreport/bigscreen2/**
   #阿里云oss存储和大鱼短信秘钥配置
   oss:
     accessKey: ??
@@ -230,10 +229,12 @@ jeecg:
   file-view-domain: http://fileview.jeecg.com
   # minio文件上传
   minio:
-    minio_url: http://minio.jeecg.com
-    minio_name: ??
-    minio_pass: ??
-    bucketName: otatest
+    publicEndpoint: http://127.0.0.1:9000
+    endpoint: 127.0.0.1
+    port: 9000
+    accessKey: root
+    secretKey: sa123456
+    bucket: comfyui
   #大屏报表参数设置
   jmreport:
     #多租户模式，默认值为空(created:按照创建人隔离、tenant:按照租户隔离) (v1.6.2+ 新增)
@@ -258,7 +259,6 @@ jeecg:
   #分布式锁配置
   redisson:
     address: 127.0.0.1:6379
-    password:
     type: STANDALONE
     enabled: true
 #cas单点登录
@@ -279,28 +279,28 @@ knife4j:
     enable: false
     username: jeecg
     password: jeecg1314
-#第三方登录
-justauth:
-  enabled: true
-  type:
-    GITHUB:
-      client-id: ??
-      client-secret: ??
-      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/github/callback
-    WECHAT_ENTERPRISE:
-      client-id: ??
-      client-secret: ??
-      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_enterprise/callback
-      agent-id: ??
-    DINGTALK:
-      client-id: ??
-      client-secret: ??
-      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/dingtalk/callback
-    WECHAT_OPEN:
-      client-id: ??
-      client-secret: ??
-      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_open/callback
-  cache:
-    type: default
-    prefix: 'demo::'
-    timeout: 1h
+##第三方登录
+#justauth:
+#  enabled: true
+#  type:
+#    GITHUB:
+#      client-id: ??
+#      client-secret: ??
+#      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/github/callback
+#    WECHAT_ENTERPRISE:
+#      client-id: ??
+#      client-secret: ??
+#      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_enterprise/callback
+#      agent-id: ??
+#    DINGTALK:
+#      client-id: ??
+#      client-secret: ??
+#      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/dingtalk/callback
+#    WECHAT_OPEN:
+#      client-id: ??
+#      client-secret: ??
+#      redirect-uri: http://sso.test.com:8080/jeecg-boot/sys/thirdLogin/wechat_open/callback
+#  cache:
+#    type: default
+#    prefix: 'demo::'
+#    timeout: 1h

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.system.mapper.ToolConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.jeecg.modules.system.entity.ToolConfig">
+        <result column="id" property="id"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="is_deleted" property="isDeleted"/>
+        <result column="tool_code" property="toolCode"/>
+        <result column="version" property="version"/>
+        <result column="param_id" property="paramId"/>
+        <result column="param_name" property="paramName"/>
+        <result column="param_type" property="paramType"/>
+    </resultMap>
+
+    <sql id="table">
+        tool_config
+    </sql>
+
+    <select id="findParam" resultMap="BaseResultMap">
+        select *
+        from
+        <include refid="table"/>
+        where tool_code = #{toolCode} and version = #{version} and param_id = #{paramId} and is_deleted = 0
+    </select>
+
+    <select id="findToolConfig" resultMap="BaseResultMap">
+        select *
+        from
+        <include refid="table"/>
+        where id = #{id}
+    </select>
+
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from
+        <include refid="table"/>
+        where tool_code = #{toolCode} and version = #{version} and is_deleted = 0
+        limit #{offset},#{pageSize}
+    </select>
+
+    <select id="count" resultType="int">
+        select count(*)
+        from
+        <include refid="table"/>
+        where tool_code = #{toolCode} and version = #{version} and is_deleted = 0
+    </select>
+
+    <insert id="insert" parameterType="org.jeecg.modules.system.entity.ToolConfig">
+        insert into
+        <include refid="table"/>
+        (tool_code,version,param_id,param_name,param_type)
+        values
+        (#{toolCode}, #{version}, #{paramId}, #{paramName},#{paramType})
+    </insert>
+
+    <update id="update" parameterType="org.jeecg.modules.system.entity.ToolConfig">
+        update
+        <include refid="table" />
+        set updated_at = now()
+        <if test="paramId != null">
+            , param_id = #{paramId}
+        </if>
+        <if test="paramName != null">
+            , param_name = #{paramName}
+        </if>
+        <if test="paramType != null">
+            , param_type = #{paramType}
+        </if>
+        where id = #{id}
+    </update>
+
+    <update id="delete">
+        update <include refid="table" /> set is_deleted = 1
+        where id = #{id}
+    </update>
+
+</mapper>
