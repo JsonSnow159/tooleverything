@@ -6,7 +6,6 @@ import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 import org.jeecg.modules.system.common.CommonConstant;
 import org.jeecg.modules.system.common.ICacheService;
-//import org.jeecg.modules.system.common.impl.RedissonDistributedLock;
 import org.jeecg.modules.system.common.impl.RedissonDistributedLock;
 import org.jeecg.modules.system.dto.WsMessage;
 import org.jeecg.modules.system.entity.CloudMachine;
